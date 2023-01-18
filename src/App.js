@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import Button from "./components/UI/Button/Button";
 import Demo from "./components/Demo";
@@ -10,9 +10,13 @@ const App = () => {
 
   const [showParagraph, setShowParagraph] = useState(false)
 
-  const toggleShowParagraphHandler = () => {
-    setShowParagraph((preState) => !preState) //short form of inversing boolean value
-  }
+  // const toggleShowParagraphHandler = () => {
+  //   setShowParagraph((preState) => !preState) //short form of inversing boolean value
+  // }
+
+  const toggleShowParagraphHandler = useCallback(() => { //c-3
+    setShowParagraph((preState) => !preState)
+  }, [])
 
   return(
     <div className="app">
@@ -38,3 +42,11 @@ export default App
 // <Demo onShow={false} />, false is a primitive value so, React.memo() works, it did not re-evaluated
 // <Button onClick={toggleShowParagraphHandler}>Show Paragraph</Button> => toggleShowParagraphHandler is a just JS function, not a primitive value, so React.memo() does not work,
 // since it is a new value always when re-evaluate the App.js
+
+// c-3
+// const obj1 = {}
+// const obj2 = {}
+// console.log(obj1 === obj2), false, since object is not a primitive value
+
+// obj1 = obj2
+// console.log(obj1 === obj2), true, pointing exact same place in the memory
