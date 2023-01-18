@@ -32,3 +32,9 @@ export default App
 // <Demo onShow={showParagraph} /> => this child component is re-evaluating and RE-RENDERING since state is changing
 // <Demo onShow={false} /> => this child component is re-evaluating (becz if a component is re-evaluated all its child component is also re-evaluated)
 // but not RE-RENDERING becz state (show={false}) is never changing
+
+// export default React.memo(Button) => should not re-evaluated, but it does, why?
+// becz React.memo(), works only for JavaScript primitive values only
+// <Demo onShow={false} />, false is a primitive value so, React.memo() works, it did not re-evaluated
+// <Button onClick={toggleShowParagraphHandler}>Show Paragraph</Button> => toggleShowParagraphHandler is a just JS function, not a primitive value, so React.memo() does not work,
+// since it is a new value always when re-evaluate the App.js

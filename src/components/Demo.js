@@ -10,4 +10,4 @@ const Demo = (props) => {
     )
 }
 
-export default Demo
+export default React.memo(Demo) //prevent unnecessary re-evaluation with React.memo()

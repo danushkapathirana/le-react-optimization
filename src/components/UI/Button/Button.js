@@ -3,6 +3,8 @@ import React from "react";
 import classes from './Button.module.css'
 
 const Button = (props) => {
+    console.log('BUTTON IS RUNNING')
+
     return(
         <button type={props.type || 'button'} className={`${classes.button} ${props.className}`} onClick={props.onClick} disabled={props.disabled}>
             {props.children}
@@ -10,4 +12,4 @@ const Button = (props) => {
     )
 }
 
-export default Button
+export default React.memo(Button) //does not work; why?
