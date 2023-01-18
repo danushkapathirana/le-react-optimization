@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
 import Button from "./components/UI/Button/Button";
+import Demo from "./components/Demo";
 
 import './App.css'
 
 const App = () => {
+  console.log('APP IS RUNNING')
+
   const [showParagraph, setShowParagraph] = useState(false)
 
   const toggleShowParagraphHandler = () => {
@@ -14,7 +17,7 @@ const App = () => {
   return(
     <div className="app">
       <h1>Hi, there.!</h1>
-      {showParagraph && <p>This is new</p>}
+      <Demo onShow={false} /> {/**c-2 */}
       <Button onClick={toggleShowParagraphHandler}>Show Paragraph</Button>
     </div>
   )
@@ -24,3 +27,8 @@ export default App
 
 // virtual DOM diffing
 // finding out the difference between two snapshots (current & previous state) and update difference in the real DOM
+
+// c-2
+// <Demo onShow={showParagraph} /> => this child component is re-evaluating and RE-RENDERING since state is changing
+// <Demo onShow={false} /> => this child component is re-evaluating (becz if a component is re-evaluated all its child component is also re-evaluated)
+// but not RE-RENDERING becz state (show={false}) is never changing
