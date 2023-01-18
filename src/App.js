@@ -9,19 +9,32 @@ const App = () => {
   console.log('APP IS RUNNING')
 
   const [showParagraph, setShowParagraph] = useState(false)
+  const [allowToggle, setAllowToggle] = useState(false)
 
   // const toggleShowParagraphHandler = () => {
   //   setShowParagraph((preState) => !preState) //short form of inversing boolean value
   // }
 
-  const toggleShowParagraphHandler = useCallback(() => { //c-3
-    setShowParagraph((preState) => !preState)
-  }, [])
+  // const toggleShowParagraphHandler = useCallback(() => { //c-3
+  //   setShowParagraph((preState) => !preState)
+  // }, [])
+
+  const toggleShowParagraphHandler = useCallback(() => { //useCallback with dependencies
+    if(allowToggle) {
+      setShowParagraph((preState) => !preState)
+    }
+  }, [allowToggle])
+
+  const allowToggleHandler = () => {
+    setAllowToggle(true)
+  }
 
   return(
     <div className="app">
       <h1>Hi, there.!</h1>
-      <Demo onShow={false} /> {/**c-2 */}
+      {/* <Demo onShow={false} /> *c-2 */}
+      <Demo onShow={showParagraph} />
+      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
       <Button onClick={toggleShowParagraphHandler}>Show Paragraph</Button>
     </div>
   )
