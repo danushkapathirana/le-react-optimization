@@ -63,3 +63,14 @@ export default App
 
 // obj1 = obj2
 // console.log(obj1 === obj2), true, pointing exact same place in the memory
+
+// state batching
+// ________________
+// when update two states in one function in the same synchronous code snippet after each other (not in a promise / not in a different then block),
+// in such cases React will batch those updates together into one state update (behind) and re-evaluated component once only, 
+// however it changes two different updates (following example)
+
+// const navigateHandler = (navPath) => {
+//   setCurrentNavPath(navPath)
+//   setDrawerIsOpen(false)
+// }
